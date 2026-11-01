@@ -47,7 +47,7 @@ def _ctx() -> ssl.SSLContext:
 
 
 def _get(url: str, timeout: int = 60) -> bytes:
-    req = urllib.request.Request(url, headers={"User-Agent": "retrieval-bench/0.1"})
+    req = urllib.request.Request(url, headers={"User-Agent": "retrieval-arena/0.1"})
     with urllib.request.urlopen(req, timeout=timeout, context=_ctx()) as r:
         return r.read()
 

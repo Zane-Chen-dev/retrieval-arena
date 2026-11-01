@@ -1,4 +1,4 @@
-# retrieval-bench
+# retrieval-arena
 
 在 BEIR 公开基准上对照四条检索基线，量化**混合检索（hybrid）相对单路的精度增益**，以及**近似最近邻（ANN）在「召回—延迟」上的取舍**。
 
@@ -137,7 +137,7 @@ SciFact 上加权高 2.63 个点，NFCorpus 上低 0.74 个点。**这个结论�
 ## 目录结构
 
 ```
-retrieval-bench/
+retrieval-arena/
 ├── src/
 │   ├── data.py         BEIR 数据集下载与加载（不依赖 beir 包，避免拖入 pytorch）
 │   ├── evaluate.py     Recall@k / nDCG@k / MRR@k，含自检用例

@@ -55,7 +55,7 @@ def _download(url: str, dest: Path) -> None:
     ctx.verify_mode = ssl.CERT_NONE
 
     dest.parent.mkdir(parents=True, exist_ok=True)
-    req = urllib.request.Request(url, headers={"User-Agent": "retrieval-bench/0.1"})
+    req = urllib.request.Request(url, headers={"User-Agent": "retrieval-arena/0.1"})
     with urllib.request.urlopen(req, timeout=60, context=ctx) as resp:
         total = int(resp.headers.get("Content-Length") or 0)
         with open(dest, "wb") as f, tqdm(
