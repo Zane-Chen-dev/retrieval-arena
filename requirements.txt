@@ -1,0 +1,11 @@
+# 核心
+numpy
+pandas
+tqdm
+
+# B1 稀疏基线（自实现 BM25，rank_bm25 仅用于交叉验证）
+rank_bm25
+
+# B2/B3/B4 稠密与融合
+faiss-cpu
+sentence-transformers

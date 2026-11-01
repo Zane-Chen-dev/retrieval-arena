@@ -1,0 +1,22 @@
+# 环境
+.venv/
+__pycache__/
+*.pyc
+
+# 数据（约 5 MB，可复现下载，不入库）
+data/
+!data/.gitkeep
+
+# 模型缓存
+models/
+*.onnx
+*.pt
+*.bin
+
+# 临时产物
+*.log
+_tmp_*
+
+# 百度网盘同步临时文件（会打断 git add）
+*.baiduyun.*
+.baiduyun.*
