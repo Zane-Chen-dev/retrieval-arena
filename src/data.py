@@ -49,10 +49,8 @@ class Dataset:
 
 
 def _download(url: str, dest: Path) -> None:
-    """带进度下载。本地代理会 MITM 证书，所以关掉校验（只影响公开数据集下载）。"""
+    """带进度下载，使用系统默认的 TLS 证书校验。"""
     ctx = ssl.create_default_context()
-    ctx.check_hostname = False
-    ctx.verify_mode = ssl.CERT_NONE
 
     dest.parent.mkdir(parents=True, exist_ok=True)
     req = urllib.request.Request(url, headers={"User-Agent": "retrieval-arena/0.1"})

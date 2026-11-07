@@ -2,8 +2,7 @@
 
 为什么要这个脚本
 ----------------
-国内直连 `huggingface.co` 基本不通；`hf-mirror.com` 在本机也出现 TLS 握手被中断
-（本地代理 MITM）。ModelScope 稳定可达，先拉到本地目录，再让
+通过 ModelScope 拉到本地目录，再让
 `sentence_transformers` 从路径加载，绕开 hub 的下载逻辑。
 
 下载完成后：
@@ -40,10 +39,7 @@ NEEDED = [
 
 
 def _ctx() -> ssl.SSLContext:
-    c = ssl.create_default_context()
-    c.check_hostname = False
-    c.verify_mode = ssl.CERT_NONE
-    return c
+    return ssl.create_default_context()
 
 
 def _get(url: str, timeout: int = 60) -> bytes:
@@ -64,11 +60,7 @@ def download(repo: str = DEFAULT_REPO, dest: Path | None = None) -> Path:
         out.parent.mkdir(parents=True, exist_ok=True)
         q = urllib.parse.urlencode({"Revision": "master", "FilePath": rel})
         url = f"{MODELSCOPE_API}/{repo}/repo?{q}"
-        try:
-            data = _get(url)
-        except Exception as e:
-            print(f"  失败 {rel}: {type(e).__name__} {e}")
-            continue
+        data = _get(url)
         out.write_bytes(data)
         print(f"  {rel:36s} {len(data):>12,d} B")
 
