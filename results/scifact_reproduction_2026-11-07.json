@@ -1,0 +1,612 @@
+{
+  "dataset": {
+    "docs": 5183,
+    "queries": 1109,
+    "qrels_queries": 300,
+    "judged_pairs": 339
+  },
+  "judged_queries": 300,
+  "parameters": {
+    "top_k": 100,
+    "rrf_k": 60,
+    "M": 32,
+    "ef_search_configured": 64,
+    "ef_search_effective": 100,
+    "gain": "trec"
+  },
+  "metrics": {
+    "bm25": {
+      "recall@10": 0.7849444444444444,
+      "ndcg@10": 0.6644511502901209,
+      "mrr@10": 0.6325026455026455,
+      "recall@100": 0.8892222222222221,
+      "ndcg@100": 0.6883966686260984,
+      "mrr@100": 0.636992911353836
+    },
+    "dense": {
+      "recall@10": 0.7833333333333333,
+      "ndcg@10": 0.6450816521455776,
+      "mrr@10": 0.6047248677248678,
+      "recall@100": 0.925,
+      "ndcg@100": 0.6766792727166785,
+      "mrr@100": 0.6109808170686298
+    },
+    "rrf": {
+      "recall@10": 0.8145555555555556,
+      "ndcg@10": 0.6853446171481922,
+      "mrr@10": 0.6475291005291005,
+      "recall@100": 0.9543333333333334,
+      "ndcg@100": 0.7164511816755981,
+      "mrr@100": 0.6531842769142414
+    }
+  },
+  "latency_ms": {
+    "bm25": {
+      "p50": 8.797750022495165,
+      "p99": 16.587609034613696
+    },
+    "dense": {
+      "p50": 0.4217500099912286,
+      "p99": 0.9637359896441904
+    },
+    "rrf": {
+      "p50": 9.382400021422654,
+      "p99": 17.33369302528444
+    }
+  },
+  "latency_scope": "按查询顺序单次计时，无预热；不含查询向量编码、索引构建和模型加载，非端到端延迟",
+  "cases": {
+    "fusion_worse": [
+      {
+        "query_id": "1088",
+        "query": "Silencing of Bcl2 is important for the maintenance and progression of tumors.",
+        "ndcg10": {
+          "bm25": 0.0,
+          "dense": 1.0,
+          "rrf": 0.0
+        },
+        "top10": {
+          "bm25": [
+            {
+              "doc_id": "11915280",
+              "relevance": null
+            },
+            {
+              "doc_id": "5765455",
+              "relevance": null
+            },
+            {
+              "doc_id": "14863011",
+              "relevance": null
+            },
+            {
+              "doc_id": "24282306",
+              "relevance": null
+            },
+            {
+              "doc_id": "41548287",
+              "relevance": null
+            },
+            {
+              "doc_id": "7621534",
+              "relevance": null
+            },
+            {
+              "doc_id": "42836872",
+              "relevance": null
+            },
+            {
+              "doc_id": "3840043",
+              "relevance": null
+            },
+            {
+              "doc_id": "6807122",
+              "relevance": null
+            },
+            {
+              "doc_id": "16086778",
+              "relevance": null
+            }
+          ],
+          "dense": [
+            {
+              "doc_id": "37549932",
+              "relevance": 1
+            },
+            {
+              "doc_id": "4323425",
+              "relevance": null
+            },
+            {
+              "doc_id": "8496132",
+              "relevance": null
+            },
+            {
+              "doc_id": "11900630",
+              "relevance": null
+            },
+            {
+              "doc_id": "34439544",
+              "relevance": null
+            },
+            {
+              "doc_id": "16550075",
+              "relevance": null
+            },
+            {
+              "doc_id": "14863011",
+              "relevance": null
+            },
+            {
+              "doc_id": "19510470",
+              "relevance": null
+            },
+            {
+              "doc_id": "21793890",
+              "relevance": null
+            },
+            {
+              "doc_id": "33638477",
+              "relevance": null
+            }
+          ],
+          "rrf": [
+            {
+              "doc_id": "14863011",
+              "relevance": null
+            },
+            {
+              "doc_id": "3559136",
+              "relevance": null
+            },
+            {
+              "doc_id": "3840043",
+              "relevance": null
+            },
+            {
+              "doc_id": "5765455",
+              "relevance": null
+            },
+            {
+              "doc_id": "7621534",
+              "relevance": null
+            },
+            {
+              "doc_id": "18682109",
+              "relevance": null
+            },
+            {
+              "doc_id": "3730196",
+              "relevance": null
+            },
+            {
+              "doc_id": "35443524",
+              "relevance": null
+            },
+            {
+              "doc_id": "19644821",
+              "relevance": null
+            },
+            {
+              "doc_id": "15570691",
+              "relevance": null
+            }
+          ]
+        }
+      },
+      {
+        "query_id": "1241",
+        "query": "The myocardial lineage develops from cardiac progenitors of mesodermal origin.",
+        "ndcg10": {
+          "bm25": 0.0,
+          "dense": 1.0,
+          "rrf": 0.0
+        },
+        "top10": {
+          "bm25": [
+            {
+              "doc_id": "6148876",
+              "relevance": null
+            },
+            {
+              "doc_id": "14296612",
+              "relevance": null
+            },
+            {
+              "doc_id": "17933691",
+              "relevance": null
+            },
+            {
+              "doc_id": "4335423",
+              "relevance": null
+            },
+            {
+              "doc_id": "4020950",
+              "relevance": null
+            },
+            {
+              "doc_id": "32797183",
+              "relevance": null
+            },
+            {
+              "doc_id": "20186814",
+              "relevance": null
+            },
+            {
+              "doc_id": "39164524",
+              "relevance": null
+            },
+            {
+              "doc_id": "4421787",
+              "relevance": null
+            },
+            {
+              "doc_id": "18064113",
+              "relevance": null
+            }
+          ],
+          "dense": [
+            {
+              "doc_id": "4427392",
+              "relevance": 1
+            },
+            {
+              "doc_id": "2828460",
+              "relevance": null
+            },
+            {
+              "doc_id": "14060030",
+              "relevance": null
+            },
+            {
+              "doc_id": "32797183",
+              "relevance": null
+            },
+            {
+              "doc_id": "25858295",
+              "relevance": null
+            },
+            {
+              "doc_id": "106301",
+              "relevance": null
+            },
+            {
+              "doc_id": "4932668",
+              "relevance": null
+            },
+            {
+              "doc_id": "2973910",
+              "relevance": null
+            },
+            {
+              "doc_id": "12411274",
+              "relevance": null
+            },
+            {
+              "doc_id": "23716150",
+              "relevance": null
+            }
+          ],
+          "rrf": [
+            {
+              "doc_id": "32797183",
+              "relevance": null
+            },
+            {
+              "doc_id": "6148876",
+              "relevance": null
+            },
+            {
+              "doc_id": "14296612",
+              "relevance": null
+            },
+            {
+              "doc_id": "2828460",
+              "relevance": null
+            },
+            {
+              "doc_id": "2973910",
+              "relevance": null
+            },
+            {
+              "doc_id": "4932668",
+              "relevance": null
+            },
+            {
+              "doc_id": "14060030",
+              "relevance": null
+            },
+            {
+              "doc_id": "3619372",
+              "relevance": null
+            },
+            {
+              "doc_id": "39164524",
+              "relevance": null
+            },
+            {
+              "doc_id": "4020950",
+              "relevance": null
+            }
+          ]
+        }
+      }
+    ],
+    "fusion_better": [
+      {
+        "query_id": "784",
+        "query": "MicroRNA is involved in the regulation of Neural Stem Cell (NSC) differentiation and proliferation dynamic homeostasis",
+        "ndcg10": {
+          "bm25": 0.5,
+          "dense": 0.6309297535714575,
+          "rrf": 1.0
+        },
+        "top10": {
+          "bm25": [
+            {
+              "doc_id": "16999023",
+              "relevance": null
+            },
+            {
+              "doc_id": "23535770",
+              "relevance": null
+            },
+            {
+              "doc_id": "2356950",
+              "relevance": 1
+            },
+            {
+              "doc_id": "25597580",
+              "relevance": null
+            },
+            {
+              "doc_id": "38727075",
+              "relevance": null
+            },
+            {
+              "doc_id": "226488",
+              "relevance": null
+            },
+            {
+              "doc_id": "16627684",
+              "relevance": null
+            },
+            {
+              "doc_id": "15176526",
+              "relevance": null
+            },
+            {
+              "doc_id": "12742164",
+              "relevance": null
+            },
+            {
+              "doc_id": "1848452",
+              "relevance": null
+            }
+          ],
+          "dense": [
+            {
+              "doc_id": "42662816",
+              "relevance": null
+            },
+            {
+              "doc_id": "2356950",
+              "relevance": 1
+            },
+            {
+              "doc_id": "16627684",
+              "relevance": null
+            },
+            {
+              "doc_id": "2619579",
+              "relevance": null
+            },
+            {
+              "doc_id": "6285534",
+              "relevance": null
+            },
+            {
+              "doc_id": "13290521",
+              "relevance": null
+            },
+            {
+              "doc_id": "22871664",
+              "relevance": null
+            },
+            {
+              "doc_id": "12440953",
+              "relevance": null
+            },
+            {
+              "doc_id": "22843616",
+              "relevance": null
+            },
+            {
+              "doc_id": "2251426",
+              "relevance": null
+            }
+          ],
+          "rrf": [
+            {
+              "doc_id": "2356950",
+              "relevance": 1
+            },
+            {
+              "doc_id": "16627684",
+              "relevance": null
+            },
+            {
+              "doc_id": "6285534",
+              "relevance": null
+            },
+            {
+              "doc_id": "13290521",
+              "relevance": null
+            },
+            {
+              "doc_id": "23535770",
+              "relevance": null
+            },
+            {
+              "doc_id": "1848452",
+              "relevance": null
+            },
+            {
+              "doc_id": "33677323",
+              "relevance": null
+            },
+            {
+              "doc_id": "16999023",
+              "relevance": null
+            },
+            {
+              "doc_id": "14581009",
+              "relevance": null
+            },
+            {
+              "doc_id": "23727313",
+              "relevance": null
+            }
+          ]
+        }
+      },
+      {
+        "query_id": "544",
+        "query": "IFIT1 restricts viral replication by sequestrating mis-capped viral RNAs.",
+        "ndcg10": {
+          "bm25": 0.0,
+          "dense": 0.0,
+          "rrf": 0.38685280723454163
+        },
+        "top10": {
+          "bm25": [
+            {
+              "doc_id": "10559501",
+              "relevance": null
+            },
+            {
+              "doc_id": "11784947",
+              "relevance": null
+            },
+            {
+              "doc_id": "6820680",
+              "relevance": null
+            },
+            {
+              "doc_id": "26873988",
+              "relevance": null
+            },
+            {
+              "doc_id": "6404801",
+              "relevance": null
+            },
+            {
+              "doc_id": "31560225",
+              "relevance": null
+            },
+            {
+              "doc_id": "5137019",
+              "relevance": null
+            },
+            {
+              "doc_id": "44737533",
+              "relevance": null
+            },
+            {
+              "doc_id": "4407318",
+              "relevance": null
+            },
+            {
+              "doc_id": "20261352",
+              "relevance": null
+            }
+          ],
+          "dense": [
+            {
+              "doc_id": "1970884",
+              "relevance": null
+            },
+            {
+              "doc_id": "3493623",
+              "relevance": null
+            },
+            {
+              "doc_id": "44366096",
+              "relevance": null
+            },
+            {
+              "doc_id": "10559501",
+              "relevance": null
+            },
+            {
+              "doc_id": "26731863",
+              "relevance": null
+            },
+            {
+              "doc_id": "10627801",
+              "relevance": null
+            },
+            {
+              "doc_id": "11784947",
+              "relevance": null
+            },
+            {
+              "doc_id": "9539248",
+              "relevance": null
+            },
+            {
+              "doc_id": "37727521",
+              "relevance": null
+            },
+            {
+              "doc_id": "25175223",
+              "relevance": null
+            }
+          ],
+          "rrf": [
+            {
+              "doc_id": "10559501",
+              "relevance": null
+            },
+            {
+              "doc_id": "11784947",
+              "relevance": null
+            },
+            {
+              "doc_id": "44366096",
+              "relevance": null
+            },
+            {
+              "doc_id": "6820680",
+              "relevance": null
+            },
+            {
+              "doc_id": "24221369",
+              "relevance": 1
+            },
+            {
+              "doc_id": "2638387",
+              "relevance": null
+            },
+            {
+              "doc_id": "37727521",
+              "relevance": null
+            },
+            {
+              "doc_id": "7820043",
+              "relevance": null
+            },
+            {
+              "doc_id": "9539248",
+              "relevance": null
+            },
+            {
+              "doc_id": "5137019",
+              "relevance": null
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

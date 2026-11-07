@@ -8,7 +8,8 @@
 - **B2：** all-MiniLM-L6-v2 编码与 Faiss HNSW 检索。
 - **B3：** BM25 与稠密检索结果的 RRF 融合，并提供归一化加权对照。
 - **评测：** Recall@k、nDCG@k、MRR@k；支持 SciFact 和 NFCorpus。
-- **未实现：** cross-encoder 重排、IVF-PQ、生成式问答、在线服务和增量索引。
+- **实验性：** cross-encoder 重排代码及离线实验入口已加入；因模型暂不可用，尚未进行真实模型端到端验证。
+- **未实现：** IVF-PQ、生成式问答、在线服务和增量索引。
 
 ## 环境与运行
 
@@ -27,13 +28,21 @@ python -m venv .venv
 .\.venv\Scripts\python.exe scripts\run_hybrid.py --dataset scifact
 ```
 
-`scripts/run_study.py --output <新的JSON路径>` 是离线实验入口，要求 SciFact、句向量模型和对应向量缓存均已存在，拒绝覆盖输出。此入口尚未完成端到端验证。
+`scripts/run_study.py --output <新的JSON路径>` 是离线实验入口，要求 SciFact、句向量模型和对应向量缓存均已存在，拒绝覆盖输出。已在本地现有环境验证 SciFact；结果包含融合效果改善和下降的案例。未标注文档的 `relevance` 为 `null`。
 
-如遇证书错误，请检查系统信任链或网络环境；不要关闭证书验证。当前开发环境中 `sentence_transformers` 导入耗时异常，稠密和融合流程尚未在本次开源整理中重新验证。依赖尚未锁定，重新安装后结果及兼容性可能不同。
+如遇证书错误，请检查系统信任链或网络环境；不要关闭证书验证。依赖尚未锁定，重新安装后结果及兼容性可能不同。
+
+重排入口示例（需自行准备本地模型；当前尚未以真实模型验证）：
+
+```powershell
+.\.venv\Scripts\python.exe scripts\run_rerank.py --model models\ms-marco-MiniLM-L6-v2 --output results\rerank-new.json
+```
+
+该入口按 100 篇候选逐查询重排，未预热，计时不含查询编码和模型加载；小规模试运行可加 `--limit 5`，结果不代表全量数据集。实验和案例分析见 [实验记录](docs/实验记录.md)。
 
 ## 历史实验
 
-以下来自仓库内已有实验结果，不代表所有环境都能复现。2026-11-07 仅重新验证了 SciFact BM25 的 nDCG@10 和 Recall@100；其余数字尚待复验。
+以下来自仓库内实验结果，不代表所有环境都能复现。2026-11-07 在已有模型、缓存和环境下重新验证 SciFact 三条线；NFCorpus 数字为历史结果，尚待本轮复验。
 
 | 数据集 / 方法 | nDCG@10 | Recall@100 |
 | --- | ---: | ---: |
@@ -56,6 +65,7 @@ python -m venv .venv
 ```powershell
 .\.venv\Scripts\python.exe src\evaluate.py
 .\.venv\Scripts\python.exe src\hybrid.py
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
 ## 许可

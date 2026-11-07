@@ -58,14 +58,15 @@ def main() -> None:
     for qid in ids:
         one = {qid: qrels[qid]}
         scores = {name: ndcg_at_k(run, one, 10) for name, run in runs.items()}
-        rankings = {name: [{"doc_id": d, "relevance": qrels[qid].get(d, 0)} for d, _ in sorted(run[qid].items(), key=lambda x: (-x[1], x[0]))[:10]] for name, run in runs.items()}
+        # null 表示无标注；不能把没有标注的文档当作明确的不相关。
+        rankings = {name: [{"doc_id": d, "relevance": qrels[qid].get(d)} for d, _ in sorted(run[qid].items(), key=lambda x: (-x[1], x[0]))[:10]] for name, run in runs.items()}
         cases.append({"query_id": qid, "query": ds.queries[qid], "ndcg10": scores, "top10": rankings})
     cases.sort(key=lambda c: c["ndcg10"]["rrf"] - max(c["ndcg10"]["bm25"], c["ndcg10"]["dense"]))
     output = {"dataset": ds.stats, "judged_queries": len(ids), "parameters": {"top_k": 100, "rrf_k": 60, "M": 32, "ef_search_configured": 64, "ef_search_effective": 100, "gain": "trec"}, "metrics": {k: evaluate(v, qrels) for k, v in runs.items()}, "latency_ms": {k: {"p50": float(np.percentile(v, 50)), "p99": float(np.percentile(v, 99))} for k, v in elapsed.items()}, "latency_scope": "按查询顺序单次计时，无预热；不含查询向量编码、索引构建和模型加载，非端到端延迟", "cases": {"fusion_worse": cases[:2], "fusion_better": cases[-2:]}}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-    print(json.dumps({"metrics": output["metrics"], "latency_ms": output["latency_ms"], "cases": output["cases"]}, ensure_ascii=False, indent=2))
+    print(json.dumps({"metrics": output["metrics"], "latency_ms": output["latency_ms"], "case_query_ids": {k: [c["query_id"] for c in v] for k, v in output["cases"].items()}}, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
