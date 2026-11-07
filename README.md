@@ -8,7 +8,7 @@
 - **B2：** all-MiniLM-L6-v2 编码与 Faiss HNSW 检索。
 - **B3：** BM25 与稠密检索结果的 RRF 融合，并提供归一化加权对照。
 - **评测：** Recall@k、nDCG@k、MRR@k；支持 SciFact 和 NFCorpus。
-- **实验性：** cross-encoder 重排代码及离线实验入口已加入；因模型暂不可用，尚未进行真实模型端到端验证。
+- **B4：** cross-encoder 对 RRF 前 100 个候选重排；已在 SciFact 全量已标注查询上运行。
 - **未实现：** IVF-PQ、生成式问答、在线服务和增量索引。
 
 ## 环境与运行
@@ -32,7 +32,7 @@ python -m venv .venv
 
 如遇证书错误，请检查系统信任链或网络环境；不要关闭证书验证。依赖尚未锁定，重新安装后结果及兼容性可能不同。
 
-重排入口示例（需自行准备本地模型；当前尚未以真实模型验证）：
+重排入口示例（需自行准备本地模型）：
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\run_rerank.py --model models\ms-marco-MiniLM-L6-v2 --output results\rerank-new.json
@@ -49,11 +49,14 @@ python -m venv .venv
 | SciFact / BM25 | 0.6645 | 0.8892 |
 | SciFact / 稠密 HNSW | 0.6451 | 0.9250 |
 | SciFact / RRF | 0.6853 | 0.9543 |
+| SciFact / RRF + 重排 | 0.6904 | 0.9543 |
 | NFCorpus / BM25 | 0.3117 | 0.2364 |
 | NFCorpus / 稠密 HNSW | 0.3158 | 0.3112 |
 | NFCorpus / RRF | 0.3443 | 0.3268 |
 
 结果文件在 `results/`。相关文档以标注分数大于 0 判定；nDCG 默认使用 TREC gain（`2^rel - 1`）。未标注不等于一定不相关。历史延迟统计使用预先编码的查询向量，不包含查询编码、索引构建和模型加载，不能作为端到端服务延迟或工业性能结论。HNSW 在 top-k 为 100 时实际 efSearch 会被代码提升到至少 100。
+
+本次 SciFact 的重排实验使用 `cross-encoder/ms-marco-MiniLM-L6-v2`，其版本为 `fbf9045f293a58fa68636213c5e0cb8a2de5d45e`，CPU 六线程。重排前后分别测得 P50 为约 12 ms 和 5884 ms（未经预热，且不含查询编码、模型加载和建索引），仅用于说明该次实验的代价，不能作为生产环境延迟。
 
 ## 结构与自检
 
